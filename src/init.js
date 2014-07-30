@@ -1,6 +1,27 @@
 $(document).ready(function(){
   window.dancers = [];
 
+  $(".scatter").on("click", function(){
+    for (var i=0; i < window.dancers.length; i++) {
+      window.dancers[i].scatter();
+    }
+  });
+
+  $(".lineUp").on("click", function(){
+    var totalLeft = 0;
+    var totalTop = 30;
+    for (var i=0; i < window.dancers.length; i++) {
+      window.dancers[i].lineUp(totalTop, totalLeft);
+      var width = window.dancers[i].$node[0].width;
+      if (totalLeft+width > $("body").width()-width) {
+        totalLeft = 0;
+        totalTop += window.dancers[i].$node[0].height;
+      } else {
+        totalLeft += width;
+      }
+    }
+  });
+
   $(".addDancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
      * buttons on index.html. You should only need to make one small change to it.
@@ -22,12 +43,20 @@ $(document).ready(function(){
 
     // make a dancer with a random position
 
-    var dancer = dancerMakerFunction(
+    var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
       Math.random() * 1000
     );
     $('body').append(dancer.$node);
+    window.dancers.push(dancer);
+  });
+
+  $(".danceFloor").mousemove(function(e){
+    var top = (e.clientY-100 > 32) ? e.clientY-100 : 32;
+    $(".spongebob").offset({
+      top: top,
+      left: e.clientX-150
+    });
   });
 });
-
