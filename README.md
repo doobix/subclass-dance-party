@@ -1,6 +1,3 @@
 #subclass-dance-party
 
-This is a copy of the work I did on a private repo, originally a project from
-[Hack Reactor's](http://hackreactor.com) curriculum. This project was worked
-on with a pair; it's representative of the kind of problems that I've tackled,
-but not of my solo work.
+This project uses jQuery to show animated gif images on a dance floor. A spongebob gif image will follow the mouse cursor. The other images will scatter to a new position if the mouse cursor touches them.
